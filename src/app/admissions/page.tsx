@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import RegistrationForm from "@/components/forms/RegistrationForm";
 
 export const metadata: Metadata = {
@@ -14,7 +12,6 @@ export const metadata: Metadata = {
 export default function AdmissionsPage() {
   return (
     <>
-      <Header />
       <main className="pt-20">
         <Section background="white">
           <Container>
@@ -147,7 +144,6 @@ export default function AdmissionsPage() {
           </Container>
         </Section>
       </main>
-      <Footer />
     </>
   );
 }

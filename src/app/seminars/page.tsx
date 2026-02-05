@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Seminars & Events - BACE",
@@ -64,7 +62,6 @@ export default function SeminarsPage() {
 
   return (
     <>
-      <Header />
       <main className="pt-20">
         <Section background="white">
           <Container>
@@ -139,7 +136,6 @@ export default function SeminarsPage() {
           </Container>
         </Section>
       </main>
-      <Footer />
     </>
   );
 }

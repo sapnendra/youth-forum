@@ -2,8 +2,6 @@ import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import Card from "@/components/ui/Card";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 
@@ -84,7 +82,6 @@ export default function EventsCoursesPage() {
 
   return (
     <>
-      <Header />
       <main className="pt-20">
         {/* Hero */}
         <Section background="beige">
@@ -235,7 +232,6 @@ export default function EventsCoursesPage() {
           </Container>
         </Section>
       </main>
-      <Footer />
     </>
   );
 }

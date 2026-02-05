@@ -322,9 +322,9 @@ function Particles() {
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
+    size: Math.random() * 30 + 1,
     duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5,
+    delay: Math.random() * 2,
   }));
 
   return (

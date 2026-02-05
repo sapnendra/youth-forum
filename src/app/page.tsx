@@ -6,13 +6,10 @@ import WhatStudentsLearn from "@/components/home/WhatStudentsLearn";
 import VedicHostelDifference from "@/components/home/VedicHostelDifference";
 import DailyLife from "@/components/home/DailyLife";
 import ParentsTrust from "@/components/home/ParentsTrust";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 export default function HomePage() {
   return (
     <>
-      <Header />
       <main>
         <Hero />
         <SeminarsMarquee />
@@ -23,7 +20,6 @@ export default function HomePage() {
         <DailyLife />
         <ParentsTrust />
       </main>
-      <Footer />
     </>
   );
 }

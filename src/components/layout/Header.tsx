@@ -78,7 +78,7 @@ export default function Header() {
                 {/* BACE Text - Adjusted Position */}
                 <text
                   x="0"
-                  y="70"
+                  y="58"
                   fontFamily="serif"
                   fontWeight="bold"
                   fontSize="65"

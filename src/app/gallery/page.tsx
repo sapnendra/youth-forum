@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 // Note: In production, images would be stored in /public/images/gallery
 // For now, using placeholder colors to demonstrate the layout
@@ -94,7 +92,6 @@ export default function GalleryPage() {
 
   return (
     <>
-      <Header />
       <main className="pt-20">
         <Section background="white">
           <Container>
@@ -177,7 +174,6 @@ export default function GalleryPage() {
           </Container>
         </Section>
       </main>
-      <Footer />
     </>
   );
 }
