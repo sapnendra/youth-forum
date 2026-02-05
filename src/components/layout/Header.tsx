@@ -28,7 +28,6 @@ export default function Header() {
     { href: "/hostel-life", label: "Hostel Life" },
     { href: "/parents", label: "Parents" },
     { href: "/gallery", label: "Gallery" },
-    { href: "/admissions", label: "Admissions" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -42,16 +41,32 @@ export default function Header() {
       }`}
     >
       <Container>
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span
-              className={`text-2xl font-serif font-bold ${
-                showSolidBg ? "text-saffron" : "text-white"
-              }`}
+            {/* SVG Logo */}
+            <div
+              className={`relative w-44 h-14 transition-colors duration-300`}
             >
-              BACE
-            </span>
+              <svg
+                viewBox="0 0 300 80"
+                className={`w-full h-full`}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* BACE Text - Adjusted Position */}
+                <text
+                  x="80"
+                  y="50"
+                  fontFamily="serif"
+                  fontWeight="bold"
+                  fontSize="65"
+                  letterSpacing="1"
+                  className={showSolidBg ? "fill-saffron" : "fill-white"}
+                >
+                  BACE
+                </text>
+              </svg>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
