@@ -19,7 +19,7 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-saffron text-white hover:bg-saffron-light shadow-md hover:shadow-lg",
+      "bg-saffron-dark text-white hover:bg-saffron shadow-md hover:shadow-lg",
     secondary:
       "bg-forest text-white hover:bg-forest-light shadow-md hover:shadow-lg",
     outline:

@@ -13,7 +13,7 @@ export default function WhatIsBACE() {
             </h2>
             <div className="space-y-4 text-lg text-charcoal-light leading-relaxed">
               <p>
-                <strong className="text-saffron">
+                <strong className="text-saffron-dark">
                   Bhaktivedanta Academic and Cultural Education (BACE)
                 </strong>{" "}
                 is a youth-focused educational and cultural initiative inspired

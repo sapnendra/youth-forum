@@ -65,7 +65,11 @@ export default function Header() {
       <Container>
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link
+            href="/"
+            className="flex items-center space-x-2"
+            aria-label="BACE Home"
+          >
             {/* SVG Logo */}
             <div
               className={`relative w-44 h-14 transition-colors duration-300`}

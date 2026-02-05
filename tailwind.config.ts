@@ -13,6 +13,7 @@ const config: Config = {
           DEFAULT: "#C8621F",
           light: "#E6955D",
           muted: "#D4A574",
+          dark: "#A04C16", // Darker shade for accessible text/buttons
         },
         beige: {
           DEFAULT: "#F5F1E8",

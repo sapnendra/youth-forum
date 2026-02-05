@@ -146,7 +146,7 @@ export default function Hero() {
           className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4"
         >
           <motion.div variants={itemVariants} className="mb-6">
-            <span className="inline-block py-1 px-3 rounded-full bg-saffron/10 border border-saffron/20 text-saffron text-sm font-semibold tracking-wider uppercase">
+            <span className="inline-block py-1 px-3 rounded-full bg-saffron/10 border border-saffron/20 text-saffron-light text-sm font-semibold tracking-wider uppercase">
               Welcome to the Future of Character
             </span>
           </motion.div>
@@ -159,7 +159,7 @@ export default function Hero() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron to-gold">
               Education
             </span>{" "}
-            Meets Character
+            Meets Spirituality
           </motion.h1>
 
           <motion.p
