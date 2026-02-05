@@ -25,7 +25,7 @@ export default function IYFPage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-charcoal via-charcoal to-saffron/20 overflow-hidden">
+      <section className="relative min-h-[60vh] py-5 sm:py-0 flex items-center bg-gradient-to-br from-charcoal via-charcoal to-saffron/20 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <svg
             className="w-full h-full"

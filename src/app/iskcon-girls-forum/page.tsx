@@ -24,7 +24,7 @@ export default function IGFPage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-r from-beige to-white overflow-hidden">
+      <section className="relative min-h-[60vh] py-5 sm:py-0 flex items-center bg-gradient-to-r from-beige to-white overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-forest/5 skew-x-12 transform origin-top-right"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-saffron/5 rounded-full blur-3xl"></div>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AdmissionsPage() {
   return (
     <>
-      <main className="pt-20">
+      <main className="pt-10">
         <Section background="white">
           <Container>
             <div className="max-w-4xl mx-auto">

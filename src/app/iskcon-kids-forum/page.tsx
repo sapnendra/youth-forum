@@ -25,7 +25,7 @@ export default function IKFPage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#FFF8E1] overflow-hidden">
+      <section className="relative min-h-[60vh] py-5 sm:py-0 flex items-center bg-[#FFF8E1] overflow-hidden">
         {/* Playful Background Shapes */}
         <div className="absolute top-10 left-10 text-saffron/20 animate-bounce delay-700">
           <Sun className="w-24 h-24" />
