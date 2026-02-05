@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Button from "../ui/Button";
 import Container from "../ui/Container";
@@ -8,6 +9,8 @@ import Container from "../ui/Container";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +32,13 @@ export default function Header() {
     { href: "/contact", label: "Contact" },
   ];
 
+  // On non-homepage, always show solid background
+  const showSolidBg = !isHomePage || isScrolled;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-3" : "bg-transparent py-5"
+        showSolidBg ? "bg-white shadow-md py-3" : "bg-transparent py-5"
       }`}
     >
       <Container>
@@ -40,7 +46,9 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <span
-              className={`text-2xl font-serif font-bold ${isScrolled ? "text-saffron" : "text-white"}`}
+              className={`text-2xl font-serif font-bold ${
+                showSolidBg ? "text-saffron" : "text-white"
+              }`}
             >
               BACE
             </span>
@@ -53,7 +61,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  isScrolled
+                  showSolidBg
                     ? "text-charcoal hover:text-saffron"
                     : "text-white hover:text-beige"
                 }`}
@@ -80,13 +88,19 @@ export default function Header() {
           >
             <div className="w-6 h-5 flex flex-col justify-between">
               <span
-                className={`block h-0.5 w-full transition-all ${isScrolled ? "bg-charcoal" : "bg-white"}`}
+                className={`block h-0.5 w-full transition-all ${
+                  showSolidBg ? "bg-charcoal" : "bg-white"
+                }`}
               />
               <span
-                className={`block h-0.5 w-full transition-all ${isScrolled ? "bg-charcoal" : "bg-white"}`}
+                className={`block h-0.5 w-full transition-all ${
+                  showSolidBg ? "bg-charcoal" : "bg-white"
+                }`}
               />
               <span
-                className={`block h-0.5 w-full transition-all ${isScrolled ? "bg-charcoal" : "bg-white"}`}
+                className={`block h-0.5 w-full transition-all ${
+                  showSolidBg ? "bg-charcoal" : "bg-white"
+                }`}
               />
             </div>
           </button>
