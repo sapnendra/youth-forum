@@ -66,7 +66,7 @@ export default function Footer() {
             <p>© {currentYear} BACE. All rights reserved.</p>
             <p className="mt-2 md:mt-0">
               Design and Developed by{" "}
-              <span className="text-white"><a href="https://sapnendra.tech" target="_blank">Sapnendra</a></span>
+              <span className="text-blue-400"><a href="https://sapnendra.tech" target="_blank">Sapnendra</a></span>
             </p>
           </div>
         </div>

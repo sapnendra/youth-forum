@@ -107,15 +107,23 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            {navLinks.map((link) =>
-              link.dropdown ? (
+          <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4">
+            {navLinks.map((link) => {
+              const isActive = link.dropdown
+                ? link.dropdown.some((item) => item.href === pathname)
+                : pathname === link.href;
+
+              return link.dropdown ? (
                 <div key={link.label} className="relative group">
                   <button
-                    className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-200 ${
-                      showSolidBg
-                        ? "text-charcoal hover:text-saffron"
-                        : "text-white hover:text-beige"
+                    className={`flex items-center space-x-1 text-sm font-medium transition-all duration-300 px-4 py-2 rounded-full border ${
+                      isActive
+                        ? showSolidBg
+                          ? "bg-saffron/10 text-saffron border-saffron/20"
+                          : "bg-white/10 text-white border-white/20 backdrop-blur-sm"
+                        : showSolidBg
+                          ? "border-transparent text-charcoal hover:bg-saffron/5 hover:text-saffron"
+                          : "border-transparent text-white hover:bg-white/10 hover:text-white"
                     }`}
                   >
                     <span>{link.label}</span>
@@ -123,12 +131,16 @@ export default function Header() {
                   </button>
                   {/* Dropdown Menu */}
                   <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                    <div className="bg-white rounded-lg shadow-xl p-2 border border-black/5">
+                    <div className="bg-white rounded-xl shadow-xl p-2 border border-black/5">
                       {link.dropdown.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="block px-4 py-2 text-sm text-charcoal hover:bg-beige/50 hover:text-saffron rounded-md transition-colors"
+                          className={`block px-4 py-2 text-sm rounded-lg transition-colors ${
+                            pathname === item.href
+                              ? "bg-saffron/10 text-saffron font-medium"
+                              : "text-charcoal hover:bg-beige/50 hover:text-saffron"
+                          }`}
                         >
                           {item.label}
                         </Link>
@@ -140,16 +152,20 @@ export default function Header() {
                 <Link
                   key={link.href!}
                   href={link.href!}
-                  className={`text-sm font-medium transition-colors duration-200 ${
-                    showSolidBg
-                      ? "text-charcoal hover:text-saffron"
-                      : "text-white hover:text-beige"
+                  className={`text-sm font-medium transition-all duration-300 px-4 py-2 rounded-full border ${
+                    isActive
+                      ? showSolidBg
+                        ? "bg-saffron/10 text-saffron border-saffron/20"
+                        : "bg-white/10 text-white border-white/20 backdrop-blur-sm"
+                      : showSolidBg
+                        ? "border-transparent text-charcoal hover:bg-saffron/5 hover:text-saffron"
+                        : "border-transparent text-white hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {link.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
           </nav>
 
           {/* CTA Button */}
@@ -195,12 +211,20 @@ export default function Header() {
             }`}
           >
             <nav className="flex flex-col space-y-2">
-              {navLinks.map((link) =>
-                link.dropdown ? (
+              {navLinks.map((link) => {
+                const isActive = link.dropdown
+                  ? link.dropdown.some((item) => item.href === pathname)
+                  : pathname === link.href;
+
+                return link.dropdown ? (
                   <div key={link.label}>
                     <button
                       onClick={() => toggleDropdown(link.label)}
-                      className="w-full flex items-center justify-between text-charcoal hover:text-saffron font-medium py-2 transition-colors"
+                      className={`w-full flex items-center justify-between font-medium py-2 transition-colors ${
+                        isActive
+                          ? "text-saffron"
+                          : "text-charcoal hover:text-saffron"
+                      }`}
                     >
                       <span>{link.label}</span>
                       <ChevronDown
@@ -217,7 +241,11 @@ export default function Header() {
                             key={item.href}
                             href={item.href}
                             onClick={() => setIsMenuOpen(false)}
-                            className="block text-sm text-charcoal/80 hover:text-saffron py-1"
+                            className={`block text-sm py-1 ${
+                              pathname === item.href
+                                ? "text-saffron font-semibold"
+                                : "text-charcoal/80 hover:text-saffron"
+                            }`}
                           >
                             {item.label}
                           </Link>
@@ -230,12 +258,16 @@ export default function Header() {
                     key={link.href!}
                     href={link.href!}
                     onClick={() => setIsMenuOpen(false)}
-                    className="block text-charcoal hover:text-saffron font-medium py-2 transition-colors"
+                    className={`block font-medium py-2 transition-colors ${
+                      isActive
+                        ? "text-saffron"
+                        : "text-charcoal hover:text-saffron"
+                    }`}
                   >
                     {link.label}
                   </Link>
-                ),
-              )}
+                );
+              })}
               <div className="pt-2">
                 <Link href="/admissions" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="primary" size="sm" className="w-full">
