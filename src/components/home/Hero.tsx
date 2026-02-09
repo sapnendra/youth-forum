@@ -7,9 +7,6 @@ import {
   useMotionValue,
   useMotionTemplate,
   Variants,
-  useTransform,
-  MotionValue,
-  useSpring,
 } from "framer-motion";
 import {
   BookOpen,
@@ -324,7 +321,7 @@ function Particles() {
     y: Math.random() * 100,
     size: Math.random() * 30 + 1,
     duration: Math.random() * 10 + 10,
-    delay: Math.random() * 2,
+    delay: Math.random() * 0.5,
   }));
 
   return (

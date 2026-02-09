@@ -39,7 +39,7 @@ export default function Header() {
     {
       label: "Campus Life",
       dropdown: [
-        { href: "/alumni", label: "Our Alumni" },
+        { href: "/our-alumani", label: "Our Alumni" },
         { href: "/hostel-life", label: "Hostel Life" },
         { href: "/events-courses", label: "Events & Courses" },
         { href: "/parents-view", label: "What Parents Says" },
