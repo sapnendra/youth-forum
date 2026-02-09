@@ -40,11 +40,6 @@ export async function getPublicGrowthStats() {
     },
   ]);
 
-  console.log(
-    "Aggregation Result:",
-    JSON.stringify(registrationAggregation, null, 2),
-  );
-
   // Format for chart
   const growthData = registrationAggregation.map((item) => {
     const date = new Date(item._id.year, item._id.month - 1, item._id.day);
