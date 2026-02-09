@@ -11,6 +11,7 @@ const registrationSchema = new mongoose.Schema({
     required: true,
     trim: true,
     lowercase: true,
+    index: true,
   },
   phone: {
     type: String,
@@ -21,6 +22,7 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    index: true,
   },
   currentCity: {
     type: String,
@@ -36,10 +38,33 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+
+  // Admin management fields
+  contacted: {
+    type: Boolean,
+    default: false,
+    index: true,
+  },
+  internalNote: {
+    type: String,
+    trim: true,
+  },
+
+  // Future: Link to user account
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: false,
+    index: true,
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,
+    index: true,
   },
+
+  // Keep legacy status field for backward compatibility
   status: {
     type: String,
     enum: ["pending", "contacted", "accepted", "rejected"],

@@ -20,6 +20,29 @@
   h6 {
     @apply font-serif;
   }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-beige-soft;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-charcoal-light/50 rounded-full border-2 border-beige-soft hover:bg-saffron;
+  }
+
+  /* Dark Scrollbar for Admin Sidebar */
+  .custom-scrollbar-dark::-webkit-scrollbar-track {
+    @apply bg-charcoal;
+  }
+
+  .custom-scrollbar-dark::-webkit-scrollbar-thumb {
+    @apply bg-charcoal-light rounded-full border-2 border-charcoal hover:bg-saffron;
+  }
 }
 
 @layer utilities {

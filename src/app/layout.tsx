@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "../styles/globals.css";
-import SmoothScroll from "@/components/animations/SmoothScroll";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,11 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body>
-        <Header />
-        <SmoothScroll>{children}</SmoothScroll>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

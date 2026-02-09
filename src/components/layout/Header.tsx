@@ -19,11 +19,11 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/gallery", label: "Gallery" },
@@ -42,10 +42,17 @@ export default function Header() {
         { href: "/alumni", label: "Our Alumni" },
         { href: "/hostel-life", label: "Hostel Life" },
         { href: "/events-courses", label: "Events & Courses" },
-        { href: "/parents", label: "What Parents Says" },
+        { href: "/parents-view", label: "What Parents Says" },
       ],
     },
-    { href: "/about", label: "About" },
+    {
+      label: "About",
+      dropdown: [
+        { href: "/about", label: "About Us" },
+        { href: "/testimonials", label: "Student Stories" },
+        { href: "/reviews", label: "Share Experience" },
+      ],
+    },
     { href: "/contact", label: "Contact" },
   ];
 
