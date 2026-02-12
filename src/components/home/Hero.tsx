@@ -1,410 +1,276 @@
 "use client";
 
-import React, { useRef } from "react";
+import { motion, useSpring, useTransform, useInView } from "framer-motion";
 import Link from "next/link";
-import {
-  motion,
-  useMotionValue,
-  useMotionTemplate,
-  Variants,
-} from "framer-motion";
 import Button from "../ui/Button";
-import Container from "../ui/Container";
+import {
+  BookOpen,
+  Users,
+  Sparkles,
+  MoveRight,
+  TrendingUp,
+  Award,
+  Star,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  // Mouse position for spotlight effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
-  // Spotlight gradient
-  const background = useMotionTemplate`radial-gradient(
-    600px circle at ${mouseX}px ${mouseY}px,
-    rgba(200, 98, 31, 0.15),
-    transparent 80%
-  )`;
-
-  // Text Animation Variants
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
-  };
-
-  // Graph data - showing student growth over time (no dates)
-  const graphData = [
-    { label: "Jan", value: 15 },
-    { label: "Feb", value: 28 },
-    { label: "Mar", value: 42 },
-    { label: "Apr", value: 65 },
-    { label: "May", value: 89 },
-    { label: "Jun", value: 120 },
-    { label: "Jul", value: 156 },
-    { label: "Aug", value: 198 },
-  ];
-
-  const maxValue = Math.max(...graphData.map((d) => d.value));
-
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#1a1a1a] group"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Dynamic Background Spotlight */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{ background }}
-      />
-
-      {/* Base Gradients (Static) */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-saffron/10 rounded-full blur-[120px] mix-blend-screen opacity-30 animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-forest/10 rounded-full blur-[120px] mix-blend-screen opacity-30 animate-pulse-slow delay-1000" />
+    <section className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden bg-[#FDFBF7] pt-20 lg:pt-0">
+      {/* Background Pattern - Subtle Mandala/Geometric */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M0 40L40 0H20L0 20M40 40V20L20 40"
+                stroke="#3D405B"
+                strokeWidth="1"
+                fill="none"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
       </div>
 
-      {/* Floating Particles (Background) */}
-      <Particles />
+      {/* Decorative Gradient Blurs */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-saffron/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
-      {/* Content - Split Screen Layout */}
-      <Container className="relative z-20 py-8 sm:py-0">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Content */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col justify-center text-center lg:text-left"
-          >
-            <motion.div variants={itemVariants} className="mb-6">
-              <span className="inline-block py-2 px-4 rounded-full bg-saffron/10 border border-saffron/20 text-saffron-light text-xs sm:text-sm font-semibold tracking-wider uppercase">
+      {/* Full Width Container */}
+      <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24 xl:px-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
+          {/* Left Column: Text & CTA */}
+          <div className="flex flex-col justify-center text-center lg:text-left">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-saffron/20 shadow-sm mb-6 lg:mb-10 mx-auto lg:mx-0 w-fit"
+            >
+              <Sparkles className="w-4 h-4 text-saffron" />
+              <span className="text-xs sm:text-sm font-medium text-charcoal/80 tracking-wide uppercase">
                 Welcome to the Future of Character
               </span>
             </motion.div>
 
+            {/* Main Headline */}
             <motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight mb-6 text-white tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-charcoal mb-8 leading-[1.05] tracking-tight"
             >
-              Where{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron to-gold">
-                Education
-              </span>{" "}
+              Where <span className="text-saffron italic">Education</span>
+              <br />
               Meets Spirituality
             </motion.h1>
 
+            {/* Subheadline */}
             <motion.p
-              variants={itemVariants}
-              className="text-base md:text-lg text-gray-300 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg lg:text-2xl text-charcoal-light mb-10 lg:mb-14 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
-              BACE a vedic hostel, provides a sanctuary for holistic growth,
-              merging academic excellence with the timeless wisdom of Vedic
-              values. Discover clarity, purpose, and community.
+              BACE provides a sanctuary for holistic growth, merging academic
+              excellence with the timeless wisdom of Vedic values.
             </motion.p>
 
+            {/* CTA Buttons */}
             <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start"
             >
               <Button
-                variant="secondary"
+                variant="primary"
                 size="lg"
-                className="relative overflow-hidden group/btn shadow-[0_0_20px_-5px_rgba(200,98,31,0.5)] hover:shadow-[0_0_30px_-5px_rgba(200,98,31,0.7)] transition-all duration-300 transform hover:scale-105"
+                className="bg-charcoal text-white hover:bg-charcoal/90 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all px-8 py-4 text-lg"
                 onClick={() => {
                   document
                     .getElementById("what-is-bace")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                <span className="relative z-10">Explore BACE</span>
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
+                Explore BACE
               </Button>
-
               <Link href="/admissions">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+                  className="border-charcoal/20 text-charcoal hover:bg-charcoal/5 group px-8 py-4 text-lg"
                 >
                   Apply Now
+                  <MoveRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right Side - Animated Growth Graph */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="hidden lg:flex items-center justify-center"
-          >
-            <div className="relative w-full max-w-md">
-              {/* Graph Container */}
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
-                {/* Graph Title */}
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    Student Growth
-                  </h3>
-                  <p className="text-sm text-gray-400">
-                    Getting guidance & clarity
-                  </p>
-                </div>
+          {/* Right Column: Animated Stats Card + Compact Features */}
+          <div className="relative flex flex-col items-center justify-center gap-8 mt-12 lg:mt-0 lg:items-end">
+            {/* Main Stats Card - Hidden on Mobile to save space per typical hero patterns, visible desktop */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative hidden lg:block bg-white/90 backdrop-blur-xl border border-white/60 shadow-2xl rounded-[2rem] p-8 w-full max-w-md rotate-2 hover:rotate-0 transition-transform duration-500 z-10"
+            >
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-saffron/20 rounded-full blur-xl animate-pulse-slow" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gold/20 rounded-full blur-2xl" />
 
-                {/* Graph SVG */}
-                <div className="relative h-64">
-                  <svg
-                    viewBox="0 0 400 200"
-                    className="w-full h-full"
-                    preserveAspectRatio="none"
-                  >
-                    {/* Grid Lines */}
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <line
-                        key={i}
-                        x1="0"
-                        y1={i * 50}
-                        x2="400"
-                        y2={i * 50}
-                        stroke="rgba(255,255,255,0.05)"
-                        strokeWidth="1"
-                      />
-                    ))}
+              <h3 className="text-2xl font-serif font-bold text-charcoal mb-6 flex items-center gap-3">
+                <TrendingUp className="w-6 h-6 text-saffron" />
+                Impact at a Glance
+              </h3>
 
-                    {/* Gradient Fill */}
-                    <defs>
-                      <linearGradient
-                        id="graphGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="0%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="rgba(200, 98, 31, 0.8)" />
-                        <stop
-                          offset="100%"
-                          stopColor="rgba(200, 98, 31, 0.05)"
-                        />
-                      </linearGradient>
-                    </defs>
-
-                    {/* Area Path */}
-                    <motion.path
-                      d={`M 0 200 ${graphData
-                        .map(
-                          (d, i) =>
-                            `L ${(i / (graphData.length - 1)) * 400} ${
-                              200 - (d.value / maxValue) * 180
-                            }`,
-                        )
-                        .join(" ")} L 400 200 Z`}
-                      fill="url(#graphGradient)"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.8, duration: 1 }}
-                    />
-
-                    {/* Line Path */}
-                    <motion.path
-                      d={`M 0 ${200 - (graphData[0].value / maxValue) * 180} ${graphData
-                        .slice(1)
-                        .map(
-                          (d, i) =>
-                            `L ${((i + 1) / (graphData.length - 1)) * 400} ${
-                              200 - (d.value / maxValue) * 180
-                            }`,
-                        )
-                        .join(" ")}`}
-                      stroke="rgba(200, 98, 31, 1)"
-                      strokeWidth="3"
-                      fill="none"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ delay: 1, duration: 2, ease: "easeOut" }}
-                    />
-
-                    {/* Data Points */}
-                    {graphData.map((d, i) => (
-                      <motion.g
-                        key={i}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 1.2 + i * 0.1, duration: 0.3 }}
-                      >
-                        <circle
-                          cx={(i / (graphData.length - 1)) * 400}
-                          cy={200 - (d.value / maxValue) * 180}
-                          r="5"
-                          fill="rgba(200, 98, 31, 1)"
-                          stroke="white"
-                          strokeWidth="2"
-                        />
-                      </motion.g>
-                    ))}
-                  </svg>
-                </div>
-
-                {/* Stats Below Graph */}
-                <div className="mt-6 grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2, duration: 0.5 }}
-                      className="text-2xl font-bold text-saffron"
-                    >
-                      {graphData[graphData.length - 1].value}+
-                    </motion.div>
-                    <div className="text-xs text-gray-400 mt-1">Students</div>
-                  </div>
-                  <div className="text-center">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2.1, duration: 0.5 }}
-                      className="text-2xl font-bold text-gold"
-                    >
-                      {Math.round(
-                        ((graphData[graphData.length - 1].value -
-                          graphData[0].value) /
-                          graphData[0].value) *
-                          100,
-                      )}
-                      %
-                    </motion.div>
-                    <div className="text-xs text-gray-400 mt-1">Growth</div>
-                  </div>
-                  <div className="text-center">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2.2, duration: 0.5 }}
-                      className="text-2xl font-bold text-forest"
-                    >
-                      100%
-                    </motion.div>
-                    <div className="text-xs text-gray-400 mt-1">Guidance</div>
-                  </div>
-                </div>
+              <div className="space-y-5">
+                <StatRow
+                  icon={<Users className="w-5 h-5 text-blue-500" />}
+                  label="Active Students"
+                  value={250}
+                  suffix="+"
+                  delay={0.5}
+                />
+                <div className="h-px bg-gray-100/80" />
+                <StatRow
+                  icon={<Award className="w-5 h-5 text-saffron" />}
+                  label="Years of Legacy"
+                  value={15}
+                  suffix="+"
+                  delay={0.7}
+                />
+                <div className="h-px bg-gray-100/80" />
+                <StatRow
+                  icon={<Star className="w-5 h-5 text-gold" />}
+                  label="Student Satisfaction"
+                  value={98}
+                  suffix="%"
+                  delay={0.9}
+                />
               </div>
 
-              {/* Floating Decorative Elements */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-saffron/30 to-gold/30 rounded-full blur-xl"
-              />
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-forest/30 to-teal-500/30 rounded-full blur-xl"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </Container>
+              {/* Floating Badge */}
+              <div className="absolute -right-4 top-1/2 -translate-y-1/2 bg-charcoal text-white px-4 py-2 rounded-xl shadow-xl text-sm font-medium transform translate-x-1/2 rotate-90 origin-bottom-right tracking-wide">
+                Since 2009
+              </div>
+            </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="hidden sm:block absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xs text-white/50 uppercase tracking-widest">
-            Scroll
-          </span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-white/0 via-white/50 to-white/0 overflow-hidden">
-            <div className="w-full h-1/2 bg-white animate-drop" />
+            {/* Feature Pillars - Compact List */}
+            {/* Stacked below text on mobile, below stats on desktop */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="grid grid-cols-1 gap-4 w-full max-w-md"
+            >
+              <CompactFeatureCard
+                icon={<BookOpen className="w-5 h-5 text-saffron" />}
+                title="Vedic Wisdom"
+                desc="Ancient philosophy for modern life."
+              />
+              <CompactFeatureCard
+                icon={<Users className="w-5 h-5 text-forest" />}
+                title="Community"
+                desc="Brotherhood rooted in service."
+              />
+              <CompactFeatureCard
+                icon={<Sparkles className="w-5 h-5 text-gold" />}
+                title="Holistic Growth"
+                desc="Character, competence & spirit."
+              />
+            </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
 
-// Simple Particles Component
-function Particles() {
-  const [particles, setParticles] = React.useState<
-    Array<{
-      id: number;
-      x: number;
-      y: number;
-      size: number;
-      duration: number;
-      delay: number;
-    }>
-  >([]);
+function StatRow({
+  icon,
+  label,
+  value,
+  suffix = "",
+  delay,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+  suffix?: string;
+  delay: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const springValue = useSpring(0, {
+    stiffness: 50,
+    damping: 20,
+    duration: 2000,
+  });
+  const displayValue = useTransform(springValue, (current) =>
+    Math.round(current),
+  );
 
-  // Generate random particles only on client side
-  React.useEffect(() => {
-    const newParticles = [...Array(20)].map((_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 30 + 1,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 0.5,
-    }));
-    setParticles(newParticles);
-  }, []);
+  useEffect(() => {
+    if (inView) {
+      setTimeout(() => {
+        springValue.set(value);
+      }, delay * 1000);
+    }
+  }, [inView, value, delay, springValue]);
 
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-white/10"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, 50, 0],
-            opacity: [0, 0.5, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "linear",
-          }}
-        />
-      ))}
+    <div className="flex items-center justify-between group py-1">
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-gray-100 transition-colors shadow-sm">
+          {icon}
+        </div>
+        <span className="font-medium text-base text-charcoal/80">{label}</span>
+      </div>
+      <div className="flex items-baseline">
+        <motion.span
+          ref={ref}
+          className="text-2xl font-bold text-charcoal font-serif"
+        >
+          {displayValue}
+        </motion.span>
+        <span className="text-xl text-saffron font-bold ml-1">{suffix}</span>
+      </div>
+    </div>
+  );
+}
+
+function CompactFeatureCard({
+  icon,
+  title,
+  desc,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div className="bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-beige-200/60 hover:border-saffron/30 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center gap-4 group cursor-default">
+      <div className="w-12 h-12 min-w-12 bg-white rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform text-charcoal group-hover:text-saffron border border-gray-50">
+        {icon}
+      </div>
+      <div>
+        <h3 className="text-base font-serif font-bold text-charcoal group-hover:text-saffron transition-colors mb-0.5">
+          {title}
+        </h3>
+        <p className="text-charcoal-light text-sm font-light leading-snug">
+          {desc}
+        </p>
+      </div>
     </div>
   );
 }

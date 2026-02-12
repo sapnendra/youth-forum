@@ -95,7 +95,7 @@ export default function Header() {
                   fontWeight="bold"
                   fontSize="65"
                   letterSpacing="1"
-                  className={showSolidBg ? "fill-saffron" : "fill-white"}
+                  className={showSolidBg ? "fill-saffron" : "fill-charcoal"}
                 >
                   BACE
                 </text>
@@ -106,7 +106,7 @@ export default function Header() {
                   fontWeight="bold"
                   fontSize="25"
                   letterSpacing="1"
-                  className={showSolidBg ? "fill-saffron" : "fill-white"}
+                  className={showSolidBg ? "fill-saffron" : "fill-charcoal"}
                 >
                   BYC
                 </text>
@@ -128,10 +128,10 @@ export default function Header() {
                       isActive
                         ? showSolidBg
                           ? "bg-saffron/10 text-saffron border-saffron/20"
-                          : "bg-white/10 text-white border-white/20 backdrop-blur-sm"
+                          : "bg-charcoal/10 text-charcoal border-charcoal/20 backdrop-blur-sm"
                         : showSolidBg
                           ? "border-transparent text-charcoal hover:bg-saffron/5 hover:text-saffron"
-                          : "border-transparent text-white hover:bg-white/10 hover:text-white"
+                          : "border-transparent text-charcoal hover:bg-charcoal/10 hover:text-charcoal"
                     }`}
                   >
                     <span>{link.label}</span>
@@ -164,10 +164,10 @@ export default function Header() {
                     isActive
                       ? showSolidBg
                         ? "bg-saffron/10 text-saffron border-saffron/20"
-                        : "bg-white/10 text-white border-white/20 backdrop-blur-sm"
+                        : "bg-charcoal/10 text-charcoal border-charcoal/20 backdrop-blur-sm"
                       : showSolidBg
                         ? "border-transparent text-charcoal hover:bg-saffron/5 hover:text-saffron"
-                        : "border-transparent text-white hover:bg-white/10 hover:text-white"
+                        : "border-transparent text-charcoal hover:bg-charcoal/10 hover:text-charcoal"
                   }`}
                 >
                   {link.label}
@@ -192,21 +192,9 @@ export default function Header() {
             aria-label="Toggle menu"
           >
             <div className="w-6 h-5 flex flex-col justify-between">
-              <span
-                className={`block h-0.5 w-full transition-all ${
-                  showSolidBg ? "bg-charcoal" : "bg-white"
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-full transition-all ${
-                  showSolidBg ? "bg-charcoal" : "bg-white"
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-full transition-all ${
-                  showSolidBg ? "bg-charcoal" : "bg-white"
-                }`}
-              />
+              <span className="block h-0.5 w-full bg-charcoal transition-all" />
+              <span className="block h-0.5 w-full bg-charcoal transition-all" />
+              <span className="block h-0.5 w-full bg-charcoal transition-all" />
             </div>
           </button>
         </div>
