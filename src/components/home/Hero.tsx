@@ -1,8 +1,15 @@
 "use client";
 
-import { motion, useSpring, useTransform, useInView } from "framer-motion";
+import {
+  motion,
+  useSpring,
+  useTransform,
+  useInView,
+  useScroll,
+} from "framer-motion";
 import Link from "next/link";
 import Button from "../ui/Button";
+import Container from "../ui/Container";
 import {
   BookOpen,
   Users,
@@ -12,25 +19,29 @@ import {
   Award,
   Star,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 100]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -100]);
+
   return (
     <section className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden bg-[#FDFBF7] pt-20 lg:pt-0">
       {/* Background Pattern - Subtle Mandala/Geometric */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
+      <div className="absolute inset-0 z-0 opacity-[0.08] pointer-events-none mix-blend-multiply">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern
               id="grid"
-              width="40"
-              height="40"
+              width="60"
+              height="60"
               patternUnits="userSpaceOnUse"
             >
               <path
-                d="M0 40L40 0H20L0 20M40 40V20L20 40"
+                d="M30 60L60 30L30 0L0 30L30 60Z"
                 stroke="#3D405B"
-                strokeWidth="1"
+                strokeWidth="0.5"
                 fill="none"
               />
             </pattern>
@@ -39,139 +50,164 @@ export default function Hero() {
         </svg>
       </div>
 
-      {/* Decorative Gradient Blurs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-saffron/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+      {/* Decorative Gradient Blurs - Refined & More Subtle */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-saffron/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
-      {/* Full Width Container */}
-      <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-12 lg:px-24 xl:px-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
-          {/* Left Column: Text & CTA */}
-          <div className="flex flex-col justify-center text-center lg:text-left">
+      {/* Main Container - Slightly wider than standard */}
+      <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-12 lg:px-16 max-w-[1540px] mx-auto">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
+          {/* Left Column: Text & CTA (7 Columns) */}
+          <div className="lg:col-span-7 flex flex-col justify-center gap-8 text-center lg:text-left">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-saffron/20 shadow-sm mb-6 lg:mb-10 mx-auto lg:mx-0 w-fit"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-saffron/20 shadow-sm mb-8 mx-auto lg:mx-0 w-fit backdrop-blur-sm"
             >
-              <Sparkles className="w-4 h-4 text-saffron" />
-              <span className="text-xs sm:text-sm font-medium text-charcoal/80 tracking-wide uppercase">
-                Welcome to the Future of Character
+              <Sparkles className="w-3.5 h-3.5 text-saffron" />
+              <span className="text-xs font-semibold text-charcoal/80 tracking-widest uppercase">
+                Est. 2009 • Vedic Wisdom
               </span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline - Pixel Perfect Typography */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-charcoal mb-8 leading-[1.05] tracking-tight"
+              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              className="font-serif font-medium text-charcoal mb-8 leading-[1.05] tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem]"
             >
-              Where <span className="text-saffron italic">Education</span>
+              Where{" "}
+              <span className="text-saffron italic relative">
+                Education
+                <svg
+                  className="absolute w-full h-3 -bottom-1 left-0 text-saffron/20"
+                  viewBox="0 0 100 10"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 5 Q 50 10 100 5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                  />
+                </svg>
+              </span>
               <br />
-              Meets Spirituality
+              Meets{" "}
+              <span className="font-semibold text-charcoal">Spirituality</span>
             </motion.h1>
 
-            {/* Subheadline */}
+            {/* Subheadline - Improved readability and line height */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg lg:text-2xl text-charcoal-light mb-10 lg:mb-14 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-lg md:text-xl text-charcoal-light/90 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
               BACE provides a sanctuary for holistic growth, merging academic
-              excellence with the timeless wisdom of Vedic values.
+              excellence with the timeless wisdom of Vedic values to forge
+              character, competence, and community.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Consistent styling */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <Button
                 variant="primary"
                 size="lg"
-                className="bg-charcoal text-white hover:bg-charcoal/90 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all px-8 py-4 text-lg"
+                className="bg-charcoal text-white hover:bg-charcoal/90 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all px-8 h-14 text-base rounded-full"
                 onClick={() => {
                   document
                     .getElementById("what-is-bace")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Explore BACE
+                Start Your Journey
               </Button>
               <Link href="/admissions">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-charcoal/20 text-charcoal hover:bg-charcoal/5 group px-8 py-4 text-lg"
+                  className="border-charcoal/20 text-charcoal group px-8 h-14 text-base rounded-full backdrop-blur-sm"
                 >
                   Apply Now
-                  <MoveRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <MoveRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </motion.div>
           </div>
 
-          {/* Right Column: Animated Stats Card + Compact Features */}
-          <div className="relative flex flex-col items-center justify-center gap-8 mt-12 lg:mt-0 lg:items-end">
-            {/* Main Stats Card - Hidden on Mobile to save space per typical hero patterns, visible desktop */}
+          {/* Right Column: Animated Stats Card + Compact Features (5 Columns) */}
+          <div className="lg:col-span-5 relative flex flex-col items-center justify-center gap-6 mt-12 lg:mt-0 lg:items-end">
+            {/* Main Stats Card - Glassmorphism Refined */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative hidden lg:block bg-white/90 backdrop-blur-xl border border-white/60 shadow-2xl rounded-[2rem] p-8 w-full max-w-md rotate-2 hover:rotate-0 transition-transform duration-500 z-10"
+              initial={{ opacity: 0, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="relative hidden lg:block bg-white/60 backdrop-blur-xl border border-white/50 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] p-8 w-full max-w-sm hover:scale-[1.02] transition-transform duration-500 z-10"
             >
-              <div className="absolute -top-8 -right-8 w-24 h-24 bg-saffron/20 rounded-full blur-xl animate-pulse-slow" />
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gold/20 rounded-full blur-2xl" />
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-saffron/10 rounded-full blur-2xl animate-pulse-slow pointer-events-none" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
 
-              <h3 className="text-2xl font-serif font-bold text-charcoal mb-6 flex items-center gap-3">
-                <TrendingUp className="w-6 h-6 text-saffron" />
+              <h3 className="text-xl font-serif font-bold text-charcoal mb-6 flex items-center gap-3">
+                <TrendingUp className="w-5 h-5 text-saffron" />
                 Impact at a Glance
               </h3>
 
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <StatRow
                   icon={<Users className="w-5 h-5 text-blue-500" />}
                   label="Active Students"
                   value={250}
                   suffix="+"
-                  delay={0.5}
+                  delay={0.6}
                 />
-                <div className="h-px bg-gray-100/80" />
+                <div className="h-px bg-charcoal/5" />
                 <StatRow
                   icon={<Award className="w-5 h-5 text-saffron" />}
                   label="Years of Legacy"
                   value={15}
                   suffix="+"
-                  delay={0.7}
+                  delay={0.8}
                 />
-                <div className="h-px bg-gray-100/80" />
+                <div className="h-px bg-charcoal/5" />
                 <StatRow
                   icon={<Star className="w-5 h-5 text-gold" />}
                   label="Student Satisfaction"
                   value={98}
                   suffix="%"
-                  delay={0.9}
+                  delay={1.0}
                 />
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -right-4 top-1/2 -translate-y-1/2 bg-charcoal text-white px-4 py-2 rounded-xl shadow-xl text-sm font-medium transform translate-x-1/2 rotate-90 origin-bottom-right tracking-wide">
+              <div className="absolute -right-4 top-1/2 -translate-y-1/2 bg-charcoal text-white px-3 py-1.5 rounded-lg shadow-xl text-xs font-medium transform translate-x-1/2 rotate-90 origin-bottom-right tracking-wide">
                 Since 2009
               </div>
             </motion.div>
 
-            {/* Feature Pillars - Compact List */}
-            {/* Stacked below text on mobile, below stats on desktop */}
+            {/* Feature Pillars - Compact List - Staggered Animation */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-1 gap-4 w-full max-w-md"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15,
+                    delayChildren: 0.7,
+                  },
+                },
+              }}
+              className="grid grid-cols-1 gap-3 w-full max-w-sm"
             >
               <CompactFeatureCard
                 icon={<BookOpen className="w-5 h-5 text-saffron" />}
@@ -212,9 +248,9 @@ function StatRow({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const springValue = useSpring(0, {
-    stiffness: 50,
-    damping: 20,
-    duration: 2000,
+    stiffness: 40,
+    damping: 25,
+    duration: 2500,
   });
   const displayValue = useTransform(springValue, (current) =>
     Math.round(current),
@@ -229,12 +265,14 @@ function StatRow({
   }, [inView, value, delay, springValue]);
 
   return (
-    <div className="flex items-center justify-between group py-1">
+    <div className="flex items-center justify-between group">
       <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-gray-100 transition-colors shadow-sm">
+        <div className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-colors shadow-sm text-charcoal/80">
           {icon}
         </div>
-        <span className="font-medium text-base text-charcoal/80">{label}</span>
+        <span className="font-medium text-base text-charcoal/80 font-sans">
+          {label}
+        </span>
       </div>
       <div className="flex items-baseline">
         <motion.span
@@ -243,11 +281,16 @@ function StatRow({
         >
           {displayValue}
         </motion.span>
-        <span className="text-xl text-saffron font-bold ml-1">{suffix}</span>
+        <span className="text-lg text-saffron font-bold ml-1">{suffix}</span>
       </div>
     </div>
   );
 }
+
+const itemVariants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+};
 
 function CompactFeatureCard({
   icon,
@@ -259,18 +302,21 @@ function CompactFeatureCard({
   desc: string;
 }) {
   return (
-    <div className="bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-beige-200/60 hover:border-saffron/30 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center gap-4 group cursor-default">
-      <div className="w-12 h-12 min-w-12 bg-white rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform text-charcoal group-hover:text-saffron border border-gray-50">
+    <motion.div
+      variants={itemVariants}
+      className="bg-white/40 backdrop-blur-sm p-4 rounded-xl border border-beige-200/50 hover:border-saffron/20 hover:bg-white/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4 group cursor-default"
+    >
+      <div className="w-10 h-10 min-w-10 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform text-charcoal group-hover:text-saffron border border-gray-50/50">
         {icon}
       </div>
       <div>
-        <h3 className="text-base font-serif font-bold text-charcoal group-hover:text-saffron transition-colors mb-0.5">
+        <h3 className="text-sm font-serif font-bold text-charcoal group-hover:text-saffron transition-colors mb-0.5">
           {title}
         </h3>
-        <p className="text-charcoal-light text-sm font-light leading-snug">
+        <p className="text-charcoal-light text-xs font-light leading-snug">
           {desc}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }

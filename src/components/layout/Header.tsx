@@ -80,36 +80,65 @@ export default function Header() {
           >
             {/* SVG Logo */}
             <div
-              className={`relative w-44 h-14 transition-colors duration-300`}
+              className={`relative w-48 h-16 transition-colors duration-300 ${
+                showSolidBg ? "text-saffron" : "text-charcoal"
+              }`}
             >
               <svg
-                viewBox="0 0 300 80"
-                className={`w-full h-full`}
+                viewBox="0 0 750 220"
+                className="w-full h-full"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* BACE Text - Adjusted Position */}
+                {/* Top Double Line */}
+                <line
+                  x1="180"
+                  y1="45"
+                  x2="570"
+                  y2="45"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                />
+                <line
+                  x1="200"
+                  y1="60"
+                  x2="550"
+                  y2="60"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  opacity="0.6"
+                />
+
+                {/* Main Text */}
                 <text
-                  x="0"
-                  y="58"
-                  fontFamily="serif"
-                  fontWeight="bold"
-                  fontSize="65"
-                  letterSpacing="1"
-                  className={showSolidBg ? "fill-saffron" : "fill-charcoal"}
+                  x="50%"
+                  y="58%"
+                  dominantBaseline="middle"
+                  textAnchor="middle"
+                  className="font-serif font-bold tracking-widest"
+                  fontSize="72"
+                  fill="currentColor"
                 >
-                  BACE
+                  BACE BYC
                 </text>
-                <text
-                  x="190"
-                  y="58"
-                  fontFamily="serif"
-                  fontWeight="bold"
-                  fontSize="25"
-                  letterSpacing="1"
-                  className={showSolidBg ? "fill-saffron" : "fill-charcoal"}
-                >
-                  BYC
-                </text>
+
+                {/* Bottom Double Line */}
+                <line
+                  x1="200"
+                  y1="170"
+                  x2="550"
+                  y2="170"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  opacity="0.6"
+                />
+                <line
+                  x1="180"
+                  y1="185"
+                  x2="570"
+                  y2="185"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                />
               </svg>
             </div>
           </Link>
